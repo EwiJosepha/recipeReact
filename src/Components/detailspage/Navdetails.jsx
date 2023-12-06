@@ -1,3 +1,6 @@
+import Favorites from "../Favorites/Iconfavorites";
+import Instruction from "../Instructions/Instructions";
+import Video from "../Video/Video";
 function Navdetails() {
   return (
     <>
@@ -15,6 +18,9 @@ function Navdetails() {
 
         <img src="src/assets/images/media.png" id="med" />
       </div>
+      <Favorites />
+      <Video />
+      <Instruction />
     </>
   );
 }

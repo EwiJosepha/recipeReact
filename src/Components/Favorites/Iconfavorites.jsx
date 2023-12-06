@@ -3,38 +3,39 @@ import { useEffect } from "react";
 import axios from "axios";
 
 function Favorites() {
-  // const geti = JSON.parse(localStorage.getItem("mealidd"));
+  const geti = JSON.parse(sessionStorage.getItem("mealidd"));
 
-  // const { data } = useQuery({
-  //   queryKey: ["mealstr"],
-  //   queryFn: async () => {
-  //     const res = await axios.get(
-  //       `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${geti}`
-  //     );
+  const { data } = useQuery({
+    queryKey: ["mealstr"],
+    queryFn: async () => {
+      const res = await axios.get(
+        `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${geti}`
+      );
 
-  //     return res.data.meals;
-  //   },
-  // });
+      return res.data.meals;
+    },
+  });
 
-  // const saveToStorage = (update) => {
-  //   localStorage.setItem("favorites", JSON.stringify(update));
-  // };
+  const saveToStorage = (update) => {
+    localStorage.setItem("favorites", JSON.stringify(update));
+  };
 
-  // const toggleFavorites = () => {
-  //   const favs = JSON.parse(localStorage.getItem("favorites")) || [];
-  //   const id = data[0].idMeal;
+  const toggleFavorites = () => {
+    const favs = JSON.parse(sessionStorage.getItem("favorites")) || [];
+    const id = data.idMeal;
 
-  //   const prev_exists = favs.find((meal) => meal.idMeal === id);
+    const prev_exists = favs.find((meal) => meal.idMeal === id);
 
-  //   if (prev_exists) {
-  //     const update = favs.filter((meal) => meal.idMeal !== id); // removing meal from localstorage
-  //     saveToStorage(update); // saving updates
-  //   } else {
-  //     const update = [...favs, data[0]];
-  //     saveToStorage(update);
-  //   }
-  // };
-  // console.log(data, geti);
+    if (prev_exists) {
+      const update = favs.filter((meal) => meal.idMeal !== id); // removing meal from localstorage
+      saveToStorage(update); // saving updates
+    } else {
+      const update = [...favs, data];
+      saveToStorage(update);
+      alert('save as favorites')
+    }
+  };
+  console.log(data, geti);
 
   return (
     <>
@@ -55,7 +56,7 @@ function Favorites() {
         </div>
 
         <div className="strmeal">
-          {/* {data && <h1 id="berry">{data[0].strMeal}</h1>} */}
+          {data && <h1 id="berry">{data.strMeal}</h1>}
         </div>
 
         <div className="flexstar">
