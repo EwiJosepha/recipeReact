@@ -19,7 +19,7 @@ function Meals() {
       // setMeals(data.Meals)
 
       console.log({ res, chosenmeal });
-      return res?.data;
+      return res?.data.meals
     },
   });
 
@@ -45,6 +45,22 @@ function Meals() {
     JSON.stringify(sessionStorage.setItem("mealidd", detailMeal));
   }
 
+  function handleAddedrecipe (meals) {
+    const recipeAdded = JSON.parse(sessionStorage.getItem("mealrecipe")) || []
+    const mealid = meals.idMeal
+    const recipe = recipeAdded.find((recipe)=>{
+      recipe.idMeal === mealid
+    })
+
+    if(recipe){
+      const updatemeals = [...recipeAdded, meals];
+      sessionStorage.setItem("mealrecipe", JSON.stringify(updatemeals))
+    }else {
+      const updatemeals = [...recipeAdded, meals]
+      sessionStorage.setItem("mealrecipe", JSON.stringify(updatemeals))
+    }
+  }
+
   return (
     <>
       {showdetails && <Navdetails />}
@@ -58,7 +74,7 @@ function Meals() {
         </div>
         <br />
         <div className="latestrecipe" id="latestrecipee">
-          {data.meals.map((meals) => {
+          {data.map((meals) => {
             return (
               <>
                 <div className="bestmeal" id="bestmeall">
@@ -73,30 +89,7 @@ function Meals() {
                   <div className="adddeletebtns">
                     <button
                       id="added"
-                      onClick={() => {
-                        const mealls = JSON.parse(
-                          sessionStorage.getItem("mealname") || []
-                        );
-                        const meallname = meals.strMeal;
-                        const prevmeals = mealls.find(
-                          (meal) => meal.strMeal === meallname
-                        );
-                        if (prevmeals) {
-                          const updatemeals = [...mealls, data[0].meals];
-                          const savetolocalstorage = sessionStorage.setItem(
-                            "mealname",
-                            updatemeals
-                          );
-                        } else {
-                          const updatemeals = [...mealls, data[0]];
-                          const savetolocalstorage = sessionStorage.setItem(
-                            "mealname",
-                            updatemeals
-                          );
-                        }
-
-                        console.log(savetolocalstorage);
-                      }}
+                     onClick={()=>handleAddedrecipe (meals)}
                     >
                       Add
                     </button>

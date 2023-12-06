@@ -17,7 +17,7 @@ function Favorites() {
   });
 
   const saveToStorage = (update) => {
-    localStorage.setItem("favorites", JSON.stringify(update));
+    sessionStorage.setItem("favorites", JSON.stringify(update));
   };
 
   const toggleFavorites = () => {
