@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { debounceFetch } from "../../../service/debounce";
 import Navdetails from "../../detailspage/Navdetails";
+import Favorites from "../../Favorites/Iconfavorites";
 
 function Meals() {
   const [chosenmeal, setChosenmeal] = useState("");
@@ -48,6 +49,7 @@ function Meals() {
     <>
 
     <Navdetails />
+    <Favorites/>
       <div className="latest" id="latestt">
         <h1 id="recipe">All Meals</h1>
         <div className="searchbtn">
