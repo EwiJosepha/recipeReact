@@ -3,11 +3,11 @@ import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { debounceFetch } from "../../../service/debounce";
+import Navdetails from "../../detailspage/Navdetails";
 
 function Meals() {
-  // const {mealid} = useContext(Appcontextt)
-  const [chosenmeal, setChosenmeal] = useState("Sushi");
-  // const [meals, setMeals] = useState([])
+  const [chosenmeal, setChosenmeal] = useState("");
+  const [showdetails, setShowdetails]= useState(true)
   const debounce = debounceFetch();
 
   const { data, isLoading, error, refetch } = useQuery({
@@ -38,34 +38,54 @@ function Meals() {
     return <h1>Sorry an error occured</h1>;
   }
 
+  function dialogueBox () {
+    setShowdetails(showdetails)
+    console.log("hey");
+  }
+
   return (
+
     <>
+
+    <Navdetails />
       <div className="latest" id="latestt">
         <h1 id="recipe">All Meals</h1>
         <div className="searchbtn">
+          <h2>Search Meals Here</h2><br />
           <input type="text" onChange={handleFetch} />
         </div>
-
+        <br />
         <div className="latestrecipe" id="latestrecipee">
           {data.meals.map((meals) => {
             return (
               <>
                 <div
-                  onClick={() => {
-                    navigate("/details");
-                    JSON.stringify(
-                      localStorage.setItem("mealidd", meals.idMeal)
-                    );
-                    console.log(meals.idMeal);
-                  }}
                   className="bestmeal"
                   id="bestmeall"
                 >
-                  <img src={meals.strMealThumb} />
+                  <img src={meals.strMealThumb}  />
 
                   <div className="area">
-                    <h5 id="popcatt">{meals.strMeal}</h5>
-                    <h5 id="area">{meals.strArea}</h5>
+                    {!showdetails?
+                    <h5 id="popcatt" onClick={dialogueBox}>{meals.strMeal}</h5>: "hey"}
+                  </div>
+                  <div className="adddeletebtns">
+                    <button id="added" onClick={()=>{
+                          const mealls =JSON.parse(
+                            sessionStorage.getItem("mealname")|| [])
+                            const meallname = meals.strMeal
+                            const prevmeals = mealls.find((meal)=>meal.strMeal === meallname)
+                            if(prevmeals){
+                              const updatemeals = [...mealls, data[0].meals]
+                              const savetolocalstorage = sessionStorage.setItem(("mealname"), updatemeals)
+                            }else{
+                              const updatemeals = [...mealls, data[0]]
+                              const savetolocalstorage = sessionStorage.setItem(("mealname"), updatemeals)                            }
+                           
+                            console.log(savetolocalstorage);
+                        
+                    }}>Add</button>
+                    <button id="deleted">Delete</button>
                   </div>
                 </div>
               </>
