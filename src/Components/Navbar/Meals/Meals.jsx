@@ -19,7 +19,7 @@ function Meals() {
       // setMeals(data.Meals)
 
       console.log({ res, chosenmeal });
-      return res?.data.meals
+      return res?.data.meals;
     },
   });
 
@@ -45,20 +45,33 @@ function Meals() {
     JSON.stringify(sessionStorage.setItem("mealidd", detailMeal));
   }
 
-  function handleAddedrecipe (meals) {
-    const recipeAdded = JSON.parse(sessionStorage.getItem("mealrecipe")) || []
-    const mealid = meals.idMeal
-    const recipe = recipeAdded.find((recipe)=>{
-      recipe.idMeal === mealid
-    })
+  function handleAddedrecipe(meals) {
+    const recipeAdded = JSON.parse(sessionStorage.getItem("mealrecipe")) || [];
+    const mealid = meals.idMeal;
+    const recipe = recipeAdded.find((recipe) => {
+      recipe.idMeal === mealid;
+    });
 
-    if(recipe){
+    if (recipe) {
       const updatemeals = [...recipeAdded, meals];
-      sessionStorage.setItem("mealrecipe", JSON.stringify(updatemeals))
-    }else {
-      const updatemeals = [...recipeAdded, meals]
-      sessionStorage.setItem("mealrecipe", JSON.stringify(updatemeals))
+      sessionStorage.setItem("mealrecipe", JSON.stringify(updatemeals));
+    } else {
+      const updatemeals = [...recipeAdded, meals];
+      sessionStorage.setItem("mealrecipe", JSON.stringify(updatemeals));
     }
+  }
+
+  function handleDeletedrecipe (meals) {
+    const recipeAdded = JSON.parse(sessionStorage.getItem("mealrecipe")) || [];
+
+    const mealid = meals.idMeal
+    const recipe = recipeAdded.find((recipe) => {
+      recipe.idMeal === mealid;
+    });
+    const deletedrecipe = recipeAdded.filter ((deleted)=>{
+      deleted.idMeal !== mealid
+    })
+    return deletedrecipe
   }
 
   return (
@@ -80,20 +93,17 @@ function Meals() {
                 <div className="bestmeal" id="bestmeall">
                   <img
                     src={meals.strMealThumb}
-                    onClick={()=>dialogueBox(meals)}
+                    onClick={() => dialogueBox(meals)}
                   />
 
                   <div className="area">
                     <h5 id="popcatt">{meals.strMeal}</h5>
                   </div>
                   <div className="adddeletebtns">
-                    <button
-                      id="added"
-                     onClick={()=>handleAddedrecipe (meals)}
-                    >
+                    <button id="added" onClick={() => handleAddedrecipe(meals)}>
                       Add
                     </button>
-                    <button id="deleted">Delete</button>
+                    <button id="deleted" onClick={()=> handleDeletedrecipe(meals)}>Delete</button>
                   </div>
                 </div>
               </>
