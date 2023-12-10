@@ -1,15 +1,31 @@
+import { useState } from "react";
+import { useEffect } from "react";
+
 function Addedmeals() {
-  const recipeAdded = JSON.parse(sessionStorage.getItem("mealrecipe")) || [];
-  console.log(recipeAdded);
+  const [deleted, setDeleted] = useState([]);
+
+ 
+
+
+  useEffect(() => {
+    const recipeAdded = JSON.parse(sessionStorage.getItem("mealrecipe")) || [];
+
+    setDeleted(recipeAdded);
+  }, []);
+
+  function handleDeletedrecipe() {
+    setDeleted([])
+  }
 
   return (
     <>
       <div className="favorites">
         <h1 id="super">Add Meals To Card</h1>
         <div className="carousel">
-          {recipeAdded.map((deleted) => (
+          {deleted.map((deleted) => (
             <div className="top">
               <img src={deleted.strMealThumb} />
+           
 
               <div className="stars">
                 <i className="fa-solid fa-star"></i>
@@ -26,12 +42,18 @@ function Addedmeals() {
                   alt="popular Meals"
                   id="pi"
                 />
-                <span>Tricia Albert</span>
+                {/* <span>Tricia Albert</span> */}
               </div>
               <div className="date">
                 <i className="fa-regular fa-message">Yesterday</i>
                 <i className="fa-regular fa-calendar-minus">456</i>
               </div>
+              <button
+                id="deleted"
+                onClick={() =>handleDeletedrecipe(deleted)}
+              >
+                Delete
+              </button>
             </div>
           ))}
         </div>

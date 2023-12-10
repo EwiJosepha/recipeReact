@@ -980,6 +980,7 @@ form {
   background-color: #fff;
   color: #4e4b4b;
   margin-left: 4px;
+  cursor: pointer;
 }
 
 #deleted {
@@ -990,6 +991,7 @@ form {
   background-color: #fff;
   color: #fb4444;
   margin-right: 5px;
+  cursor: pointer;
 }
 
 .overlay {

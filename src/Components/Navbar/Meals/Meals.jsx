@@ -62,24 +62,22 @@ function Meals() {
   }
 
   function handleDeletedrecipe(meals) {
-    let idea = [];
     let recipedeleted = [];
     recipedeleted = meals;
     console.log("datazero", recipedeleted);
     const mealid = meals.idMeal;
-    if (mealid == meals.idMeal) {
-      idea.pop(recipedeleted);
-    } else {
-      console.log("he");
-    }
+    console.log(mealid);
+    if (mealid === meals.idMeal) {
+      // recipedeleted.filter((deletemeal)=>{
+      //   deletemeal.idMeal !== mealid
+      // })
+    } 
   }
 
   return (
     <>
      
         <div className="latest" id="latestt">
-
-          <h1 id="recipe">All Meals</h1>
           <div className="searchbtn">
             <h2>Search Meals Here</h2>
             <br />
@@ -106,12 +104,12 @@ function Meals() {
                       >
                         Add
                       </button>
-                      <button
+                      {/* <button
                         id="deleted"
                         onClick={() => handleDeletedrecipe(meals)}
                       >
                         Delete
-                      </button>
+                      </button> */}
                     </div>
 
                   </div>
