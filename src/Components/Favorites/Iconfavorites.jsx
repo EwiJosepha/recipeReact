@@ -32,7 +32,7 @@ function Favorites() {
     } else {
       const update = [...favs, data];
       saveToStorage(update);
-      alert('save as favorites')
+      alert("save as favorites");
     }
   };
   console.log(data, geti);

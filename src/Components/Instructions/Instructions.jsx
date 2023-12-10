@@ -57,7 +57,7 @@ function Instruction() {
 
   return (
     <>
-      <div className="containersflex">
+      {/* <div className="containersflex"> */}
         <div className="twowrapper">
         <h4 id="ingredients">Ingredients</h4>
           <div className="ul2">
@@ -91,18 +91,8 @@ function Instruction() {
             ) 
           })}
           </div>
-          {/* <Similar /> */}
-          <div className="formm"></div>
-
-          <div className="alreadymade">
-            <h3 id="txtcenter">Already made this ?</h3>
-            <div className="btnmade">
-              <button id="already">Share Your Feedback</button>
-              <div id="orangg"></div>
-            </div>
-          </div>
         </div>
-      </div>
+      {/* </div> */}
     </>
   );
 }

@@ -61,60 +61,69 @@ function Meals() {
     }
   }
 
-  function handleDeletedrecipe (meals) {
-    const recipeAdded = JSON.parse(sessionStorage.getItem("mealrecipe")) || [];
-
-    const mealid = meals.idMeal
-    const recipe = recipeAdded.find((recipe) => {
-      recipe.idMeal === mealid;
-    });
-    const deletedrecipe = recipeAdded.filter ((deleted)=>{
-      deleted.idMeal !== mealid
-    })
-    return deletedrecipe
+  function handleDeletedrecipe(meals) {
+    let idea = [];
+    let recipedeleted = [];
+    recipedeleted = meals;
+    console.log("datazero", recipedeleted);
+    const mealid = meals.idMeal;
+    if (mealid == meals.idMeal) {
+      idea.pop(recipedeleted);
+    } else {
+      console.log("he");
+    }
   }
 
   return (
     <>
-      {showdetails && <Navdetails />}
+     
+        <div className="latest" id="latestt">
 
-      <div className="latest" id="latestt">
-        <h1 id="recipe">All Meals</h1>
-        <div className="searchbtn">
-          <h2>Search Meals Here</h2>
+          <h1 id="recipe">All Meals</h1>
+          <div className="searchbtn">
+            <h2>Search Meals Here</h2>
+            <br />
+            <input type="text" onChange={handleFetch} />
+          </div>
           <br />
-          <input type="text" onChange={handleFetch} />
-        </div>
-        <br />
-        <div className="latestrecipe" id="latestrecipee">
-          {data.map((meals) => {
-            return (
-              <>
-                <div className="bestmeal" id="bestmeall">
-                  <img
-                    src={meals.strMealThumb}
-                    onClick={() => dialogueBox(meals)}
-                  />
+          <div className="latestrecipe" id="latestrecipee">
+            {data.map((meals) => {
+              return (
+                <>
+                  <div className="bestmeal" id="bestmeall">
+                    <img
+                      src={meals.strMealThumb}
+                      onClick={() => dialogueBox(meals)}
+                    />
 
-                  <div className="area">
-                    <h5 id="popcatt">{meals.strMeal}</h5>
-                  </div>
-                  <div className="adddeletebtns">
-                    <button id="added" onClick={() => handleAddedrecipe(meals)}>
-                      Add
-                    </button>
-                    <button id="deleted" onClick={()=> handleDeletedrecipe(meals)}>Delete</button>
-                  </div>
-                </div>
-              </>
-            );
-          })}
-        </div>
-      </div>
-      <Choosefav />
+                    <div className="area">
+                      <h5 id="popcatt">{meals.strMeal}</h5>
+                    </div>
+                    <div className="adddeletebtns">
+                      <button
+                        id="added"
+                        onClick={() => handleAddedrecipe(meals)}
+                      >
+                        Add
+                      </button>
+                      <button
+                        id="deleted"
+                        onClick={() => handleDeletedrecipe(meals)}
+                      >
+                        Delete
+                      </button>
+                    </div>
 
-      {/* <Form />
-      <Footer /> */}
+                  </div>
+                </>
+              );
+            })}
+
+          </div>
+          {showdetails && <Navdetails />}
+
+        </div>
+        <Choosefav />
     </>
   );
 }

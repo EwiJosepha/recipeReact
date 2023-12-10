@@ -32,17 +32,12 @@ function Video() {
 
   return (
     <>
-      <p id="tpp">
-        One thing i learn in the Carnasei section of Broklyn NyY was how to cook
-        a good italian meal here is aresume of the recipe i created afterhaving
-        this dish in a restaurant. Enjoy!
-      </p>
 
       <div className="backgr">
         <iframe
           src={`https://www.youtube.com/embed/${video}`}
           width="100%"
-          height="480"
+          height="280"
           title="YouTube video player"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
