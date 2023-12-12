@@ -3,18 +3,24 @@ import { useEffect } from "react";
 
 function Addedmeals() {
   const [deleted, setDeleted] = useState([]);
-
- 
-
+  const [displaymealsadded, setDisplaymealsadded] = useState([]);
+  
 
   useEffect(() => {
-    const recipeAdded = JSON.parse(sessionStorage.getItem("mealrecipe")) || [];
-
-    setDeleted(recipeAdded);
+    setDisplaymealsadded(JSON.parse(sessionStorage.getItem("mealrecipe")) || []);
   }, []);
 
-  function handleDeletedrecipe() {
-    setDeleted([])
+  function handleDeletedrecipe(currentmeal) {
+    const mealid = currentmeal.idMeal;
+
+    const prev_meals = JSON.parse(sessionStorage.getItem("mealrecipe")) || [];
+
+    const update = prev_meals.filter((meal) => meal.idMeal !== mealid); // removing meal from sessionStorage
+      alert("removing meal from cards")
+    sessionStorage.setItem("mealrecipe", JSON.stringify(update));
+    setDeleted(update);
+
+    console.log(currentmeal);
   }
 
   return (
@@ -22,10 +28,9 @@ function Addedmeals() {
       <div className="favorites">
         <h1 id="super">Add Meals To Card</h1>
         <div className="carousel">
-          {deleted.map((deleted) => (
+          {displaymealsadded.map((deleted) => (
             <div className="top">
               <img src={deleted.strMealThumb} />
-           
 
               <div className="stars">
                 <i className="fa-solid fa-star"></i>
@@ -42,18 +47,19 @@ function Addedmeals() {
                   alt="popular Meals"
                   id="pi"
                 />
-                {/* <span>Tricia Albert</span> */}
               </div>
               <div className="date">
                 <i className="fa-regular fa-message">Yesterday</i>
                 <i className="fa-regular fa-calendar-minus">456</i>
               </div>
-              <button
-                id="deleted"
-                onClick={() =>handleDeletedrecipe(deleted)}
-              >
-                Delete
-              </button>
+              <div className="del">
+                <button
+                  id="deleted"
+                  onClick={() => handleDeletedrecipe(deleted)}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
         </div>

@@ -43,7 +43,7 @@ function Favorites() {
         <div className="arrowlogo">
           <div className="arro">
             <i className="fa-solid fa-arrow-trend-up" id="gla"></i>
-            <span id="gain">85% will make this gain</span>
+            <span id="gain">Mark  as Favorite</span>
           </div>
           <div className="favorit" id="favor">
             <i className="fa-solid fa-arrow-up-from-bracket" id="gla"></i>

@@ -57,22 +57,12 @@ function Meals() {
       sessionStorage.setItem("mealrecipe", JSON.stringify(updatemeals));
     } else {
       const updatemeals = [...recipeAdded, meals];
+      alert("adding meal to card")
       sessionStorage.setItem("mealrecipe", JSON.stringify(updatemeals));
     }
   }
 
-  function handleDeletedrecipe(meals) {
-    let recipedeleted = [];
-    recipedeleted = meals;
-    console.log("datazero", recipedeleted);
-    const mealid = meals.idMeal;
-    console.log(mealid);
-    if (mealid === meals.idMeal) {
-      // recipedeleted.filter((deletemeal)=>{
-      //   deletemeal.idMeal !== mealid
-      // })
-    } 
-  }
+
 
   return (
     <>
@@ -104,12 +94,6 @@ function Meals() {
                       >
                         Add
                       </button>
-                      {/* <button
-                        id="deleted"
-                        onClick={() => handleDeletedrecipe(meals)}
-                      >
-                        Delete
-                      </button> */}
                     </div>
 
                   </div>
